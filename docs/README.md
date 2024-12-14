@@ -35,8 +35,14 @@ npx playwright test tests/login.spec.ts
 
 To view the HTML report of a previous test run:
 ```bash
-npx playwright show-report
+npx playwright show-report reports/playwright-report
 ```
+
+## Documentation
+The project documentation, including the Test Strategy and Manual Test Cases, is located in the `docs/` folder:
+
+- **Test Strategy**: [docs/TestStrategy.txt](docs/TestStrategy.txt)
+- **Manual Test Cases**: [docs/ManualTestCases.txt](docs/ManualTestCases.txt)
 
 ## CI/CD Pipeline
 This repository is configured to use GitHub Actions for continuous integration and daily test execution.
