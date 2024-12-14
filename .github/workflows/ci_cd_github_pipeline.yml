@@ -40,12 +40,13 @@ jobs:
         with:
           name: playwright-results
           path: reports/playwright-report/
-
-      - name: Upload HTML Report
+          
+      - name: Generate HTML Report
         run: |
           npx playwright show-report --output=playwright-report
           zip -r playwright-report.zip playwright-report
-        if: always()
+
+      - name: Upload HTML Report
         uses: actions/upload-artifact@v3
         with:
           name: playwright-html-report
