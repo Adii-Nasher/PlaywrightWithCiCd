@@ -32,7 +32,7 @@ jobs:
 
       - name: Run Smoke Tests (Push Event)
         if: github.event_name == 'push'
-        run: npx playwright test --grep @smoke
+        run: npx playwright test tests --grep @smoke
 
       - name: Upload test results
         if: failure()
