@@ -26,8 +26,13 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install
 
-      - name: Run Playwright tests
+      - name: Run All Playwright Tests (Daily Schedule)
+        if: github.event_name == 'schedule'
         run: npx playwright test
+
+      - name: Run Smoke Tests (Push Event)
+        if: github.event_name == 'push'
+        run: npx playwright test --grep @smoke
 
       - name: Upload test results
         if: failure()
@@ -36,6 +41,12 @@ jobs:
           name: playwright-results
           path: reports/playwright-report/
 
-      - name: Generate and Upload Report
-        run: npx playwright show-report reports/playwright-report
+      - name: Upload HTML Report
+        run: |
+          npx playwright show-report --output=playwright-report
+          zip -r playwright-report.zip playwright-report
         if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: playwright-html-report
+          path: playwright-report.zip
