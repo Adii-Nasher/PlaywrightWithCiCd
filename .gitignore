@@ -1,0 +1,14 @@
+# Node modules and system logs
+node_modules/
+npm-debug.log
+
+# Reports and temporary files
+reports/
+playwright-report/
+test-results/
+
+#Local system files
+.DS_Store
+.idea/
+.vscode/
+.env
