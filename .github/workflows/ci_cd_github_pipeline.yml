@@ -26,6 +26,9 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install
 
+      - name: Listar arquivos de teste
+        run: ls -R tests
+
       - name: Run All Playwright Tests (Daily Schedule)
         if: github.event_name == 'schedule'
         run: npx playwright test
