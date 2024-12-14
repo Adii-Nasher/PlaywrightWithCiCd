@@ -1,0 +1,130 @@
+Feature: Sauce Labs Demo Website
+
+  # Scenario 1: Successful Login
+  Scenario: Successful Login
+    Given the user is on the login page
+    When the user enters valid credentials
+    And clicks the login button
+    Then the user should be redirected to the products page
+
+  # Scenario 2: Login with Invalid Credentials
+  Scenario: Login with Invalid Credentials
+    Given the user is on the login page
+    When the user enters invalid credentials
+    And clicks the login button
+    Then an error message "Username and password do not match any user in this service" should be displayed
+
+  # Scenario 3: Add Product to Cart
+  Scenario: Add Product to Cart
+    Given the user is logged in and on the products page
+    When the user clicks on the "Add to cart" button for a product
+    Then the cart count should increase by 1
+    And the product should appear in the cart
+
+  # Scenario 4: Successful Checkout
+  Scenario: Successful Checkout
+    Given the user has items in their cart
+    And the user is on the cart page
+    When the user clicks the checkout button
+    And fills in the shipping details
+    And clicks "Finish" on the checkout overview page
+    Then the user should see a confirmation message "THANK YOU FOR YOUR ORDER"
+
+  # Scenario 5: Verify Translation for Selected Locale
+  Scenario: Verify Translation for Selected Locale
+    Given the user selects "Spanish" as the locale
+    When the page reloads
+    Then the header and labels should be translated into "Spanish"
+
+  # Scenario 6: Logout
+  Scenario: Logout
+    Given the user is logged in
+    When the user clicks on the logout button
+    Then the user should be redirected to the login page
+
+  # Scenario 7: Add Multiple Products to Cart
+  Scenario: Add Multiple Products to Cart
+    Given the user is logged in and on the products page
+    When the user adds multiple products to the cart
+    Then the cart count should reflect the total number of products added
+
+  # Scenario 8: Remove Product from Cart
+  Scenario: Remove Product from Cart
+    Given the user has items in their cart
+    When the user clicks the "Remove" button for a product
+    Then the product should no longer appear in the cart
+
+  # Scenario 9: Access Inventory Without Authentication
+  Scenario: Access Inventory Without Authentication
+    Given the user is not logged in
+    When the user tries to access the inventory page directly
+    Then the user should be redirected to the login page
+
+  # Scenario 10: Validate Mandatory Fields on Checkout
+  Scenario: Validate Mandatory Fields on Checkout
+    Given the user has items in their cart
+    When the user proceeds to checkout without filling required fields
+    Then the system should display an error message for each mandatory field
+
+  # Scenario 11: Sort Products by Price
+  Scenario: Sort Products by Price
+    Given the user is on the products page
+    When the user selects to sort products by "Price (low to high)"
+    Then the products should be displayed in ascending order of price
+
+  # Scenario 12: Sort Products by Name
+  Scenario: Sort Products by Name
+    Given the user is on the products page
+    When the user selects to sort products by "Name (A to Z)"
+    Then the products should be displayed in alphabetical order
+
+  # Scenario 13: Error Message for Blank Password
+  Scenario: Error Message for Blank Password
+    Given the user is on the login page
+    When the user enters a username but leaves the password blank
+    And clicks the login button
+    Then an error message "Password is required" should be displayed
+
+  # Scenario 14: Error Message for Blank Username
+  Scenario: Error Message for Blank Username
+    Given the user is on the login page
+    When the user enters a password but leaves the username blank
+    And clicks the login button
+    Then an error message "Username is required" should be displayed
+
+  # Scenario 15: Verify Cart Reset Button
+  Scenario: Verify Cart Reset Button
+    Given the user has multiple items in their cart
+    When the user clicks the "Reset Cart" button
+    Then the cart should be emptied and the cart count should be 0
+
+  # Scenario 16: Verify Continue Shopping Button
+  Scenario: Verify Continue Shopping Button
+    Given the user has added an item to the cart
+    And is on the cart page
+    When the user clicks the "Continue Shopping" button
+    Then the user should be redirected to the products page
+
+  # Scenario 17: Verify Inventory Page Filters
+  Scenario: Verify Inventory Page Filters
+    Given the user is on the products page
+    When the user applies a filter (e.g., "Price")
+    Then only products matching the filter criteria should be displayed
+
+  # Scenario 18: Validate Empty Cart Checkout Behaviour
+  Scenario: Validate Empty Cart Checkout Behaviour
+    Given the user has no items in the cart
+    When the user attempts to proceed to checkout
+    Then the system should prevent the action and display a message "Cart is empty"
+
+  # Scenario 19: Verify Maximum Product Limit in Cart
+  Scenario: Verify Maximum Product Limit in Cart
+    Given the user is logged in and on the products page
+    When the user adds the maximum allowed quantity of a product to the cart
+    Then the cart should reflect the correct quantity
+
+  # Scenario 20: Search for Non-Existent Product
+  Scenario: Search for Non-Existent Product
+    Given the user is on the products page
+    When the user searches for a non-existent product
+    Then the system should display a message "No results found"
