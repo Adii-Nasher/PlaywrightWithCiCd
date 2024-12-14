@@ -5,12 +5,12 @@ export default defineConfig({
   use: {
     baseURL: 'https://www.saucedemo.com',
     headless: true,
-    locale: 'en-GB',
     screenshot: 'only-on-failure',
     video: 'on-first-retry',
   },
   retries: 1,
   reporter: [
-    ['html', { outputFolder: 'playwright-report' }],
+    ['html', { outputFolder: 'reports/playwright-report' }],
   ],
+  outputDir: 'reports/test-results',
 });
