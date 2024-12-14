@@ -26,9 +26,6 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install
 
-      - name: List Test Cases with Tags
-        run: npx playwright list --grep "@smoke"
-
       - name: Run All Playwright Tests (Daily Schedule)
         if: github.event_name == 'schedule'
         run: npx playwright test
