@@ -50,7 +50,7 @@ This repository is configured to use GitHub Actions for continuous integration a
 ### Pipeline Configuration
 1. On every push to the `main` branch, the pipeline will automatically:
    - Install dependencies.
-   - Run Playwright tests.
+   - Run Playwright smoke tests (tests tagged with `@smoke`).
    - Generate reports for failed tests.
 
 2. The pipeline is scheduled to run daily at 2:00 AM UTC. This can be adjusted in the `ci_cd_github_pipeline.yml` file.
@@ -58,6 +58,8 @@ This repository is configured to use GitHub Actions for continuous integration a
 ### Viewing CI/CD Reports
 After a pipeline run:
 1. Access the Playwright test report under the `playwright-report/` directory (available as an artifact in GitHub Actions).
+2. For daily test runs, all tests are executed and a full report is generated.
+3. For push events, only smoke tests (`@smoke`) are executed, with a targeted report.
 
 ## Customisation
 - To add new test cases, create new `.spec.ts` files in the `tests/` folder.
