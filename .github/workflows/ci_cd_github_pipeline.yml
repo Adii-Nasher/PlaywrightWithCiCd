@@ -32,22 +32,33 @@ jobs:
 
       - name: Run Smoke Tests (Push Event)
         if: github.event_name == 'push'
-        run: npx playwright test tests --grep "@smoke"
+        run: npx playwright test --grep "@smoke"
 
-      - name: Upload test results
-        if: failure()
-        uses: actions/upload-artifact@v3
-        with:
-          name: playwright-results
-          path: reports/playwright-report/
-          
-      - name: Generate HTML Report
+      - name: Compress HTML Report
         run: |
-          npx playwright show-report --output=playwright-report
-          zip -r playwright-report.zip playwright-report
+          zip -r reports/playwright-report.zip reports/playwright-report
+        if: always()
 
       - name: Upload HTML Report
         uses: actions/upload-artifact@v3
         with:
           name: playwright-html-report
-          path: playwright-report.zip
+          path: reports/playwright-report.zip
+
+      #- name: Upload test results
+      #  if: failure()
+      #  uses: actions/upload-artifact@v3
+      #  with:
+      #    name: playwright-results
+      #    path: reports/playwright-report/
+          
+      #- name: Generate HTML Report
+      #  run: |
+      #    npx playwright show-report --output=playwright-report
+      #    zip -r playwright-report.zip playwright-report
+
+      #- name: Upload HTML Report
+      #  uses: actions/upload-artifact@v3
+      #  with:
+      #   name: playwright-html-report
+      #    path: playwright-report.zip
