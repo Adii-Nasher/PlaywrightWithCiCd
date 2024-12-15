@@ -1,6 +1,8 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('Checkout Suite', () => {
+test.describe('Checkout Suite', {
+  tag: '@smoke',
+}, () => {
   test('Successful Checkout', async ({ page }) => {
     await page.goto('/');
     await page.fill('#user-name', 'standard_user');

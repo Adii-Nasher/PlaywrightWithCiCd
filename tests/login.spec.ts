@@ -9,7 +9,9 @@ test.describe('Login Suite', () => {
     await expect(page).toHaveURL('/inventory.html');
   });
 
-  test('Login with Invalid Credentials', async ({ page }) => {
+  test('Login with Invalid Credentials', {
+    tag: '@smoke',
+  }, async ({ page }) => { 
     await page.goto('/');
     await page.fill('#user-name', 'invalid_user');
     await page.fill('#password', 'wrong_password');
