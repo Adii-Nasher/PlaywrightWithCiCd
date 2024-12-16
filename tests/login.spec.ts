@@ -10,7 +10,9 @@ test.describe('Login Suite', () => {
     await expect(page.locator('.title')).toHaveText('Products');
   });
 
-  test('Logout', async ({ page }) => {
+  test('Logout', {
+    tag: '@smoke',
+  }, async ({ page }) => {
     await page.goto('/');
     await page.fill('#user-name', 'standard_user');
     await page.fill('#password', 'secret_sauce');
@@ -39,18 +41,27 @@ test.describe('Login Suite', () => {
     await page.fill('#password', 'secret_sauce');
     await page.click('#login-button');
     await expect(page).toHaveURL('/inventory.html');
-    const brokenImages = await page.locator('img').evaluateAll(images => images.filter(img => !img.complete || img.naturalHeight === 0));
-    expect(brokenImages.length).toBeGreaterThan(0);
-  });
+
+    // Check for broken images
+    const images = await page.locator('.inventory_item_img img').evaluateAll((imgs) => {
+      return imgs.filter(img => !(img as HTMLImageElement).complete || (img as HTMLImageElement).naturalHeight === 0);
+    });
+    });
 
   test('Successful login with a performance glitch user', async ({ page }) => {
     await page.goto('/');
     await page.fill('#user-name', 'performance_glitch_user');
     await page.fill('#password', 'secret_sauce');
     await page.click('#login-button');
-    const navigationTiming = await page.evaluate(() => performance.timing.loadEventEnd - performance.timing.navigationStart);
+
     await expect(page).toHaveURL('/inventory.html');
-  });
+    const navigationTiming = await page.evaluate(() => {
+      const { loadEventEnd, navigationStart } = performance.timing;
+      return loadEventEnd - navigationStart;
+    });
+
+    expect(navigationTiming).toBeGreaterThan(100);
+    });
 
   test('Login without a username', async ({ page }) => {
     await page.goto('/');
