@@ -42,4 +42,27 @@ test.describe('Cart Suite', () => {
     const cartBadge = await page.locator('.shopping_cart_badge');
     expect(cartBadge).not.toBeVisible();
   });
+
+  test('Validate product details in the cart', async ({ page }) => {
+    await page.goto('/');
+    await page.fill('#user-name', 'standard_user');
+    await page.fill('#password', 'secret_sauce');
+    await page.click('#login-button');
+    await page.click('data-test=add-to-cart-sauce-labs-backpack');
+    await page.click('data-test=add-to-cart-sauce-labs-bike-light');
+    await page.click('.shopping_cart_link');
+
+    const products = await page.locator('.cart_item');
+    expect(await products.count()).toBe(2);
+
+    const firstProductName = await products.nth(0).locator('.inventory_item_name').textContent();
+    const firstProductPrice = await products.nth(0).locator('.inventory_item_price').textContent();
+    expect(firstProductName).toBe('Sauce Labs Backpack');
+    expect(firstProductPrice).toBe('$29.99');
+
+    const secondProductName = await products.nth(1).locator('.inventory_item_name').textContent();
+    const secondProductPrice = await products.nth(1).locator('.inventory_item_price').textContent();
+    expect(secondProductName).toBe('Sauce Labs Bike Light');
+    expect(secondProductPrice).toBe('$9.99');
+  });
 });
