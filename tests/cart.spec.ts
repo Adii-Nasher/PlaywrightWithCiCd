@@ -32,15 +32,16 @@ test.describe('Cart Suite', () => {
     expect(cartCount).toBe('1');
   });
 
-  test('Remove a product from the cart', async ({ page }) => {
+  test('Remove a product from the cart (inside cart)', async ({ page }) => {
     await page.goto('/');
     await page.fill('#user-name', 'standard_user');
     await page.fill('#password', 'secret_sauce');
     await page.click('#login-button');
     await page.click('data-test=add-to-cart-sauce-labs-backpack');
+    await page.click('.shopping_cart_link');
     await page.click('data-test=remove-sauce-labs-backpack');
-    const cartBadge = await page.locator('.shopping_cart_badge');
-    expect(cartBadge).not.toBeVisible();
+    const cartItems = await page.locator('.cart_item');
+    expect(await cartItems.count()).toBe(0);
   });
 
   test('Validate product details in the cart', async ({ page }) => {
