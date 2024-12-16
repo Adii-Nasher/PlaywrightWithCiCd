@@ -23,3 +23,17 @@ Feature: Cart Functionality
       | Product Name           | Price    |
       | Sauce Labs Backpack    | $29.99   |
       | Sauce Labs Bike Light  | $9.99    |
+
+  @smoke
+  Scenario: Successful Checkout
+    Given the user is logged in as "standard_user" with password "secret_sauce"
+    And the user has added "Sauce Labs Backpack" to the cart
+    When the user navigates to the cart page
+    And proceeds to checkout
+    And fills in the shipping details:
+      | First Name | AutoQA  |
+      | Last Name  | Test    |
+      | Postal Code| 12345   |
+    And clicks "Continue"
+    And clicks "Finish"
+    Then the user should see a confirmation message "Thank you for your order!"
