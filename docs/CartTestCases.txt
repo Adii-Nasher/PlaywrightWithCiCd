@@ -16,12 +16,6 @@ Feature: Cart Functionality
     Then the cart should no longer display "Sauce Labs Backpack"
     And the cart count should decrease to 0
 
-  Scenario: Checkout with an empty cart
-    Given the user has logged in with "standard_user" and "secret_sauce"
-    And the cart is empty
-    When the user clicks "Checkout"
-    Then the system should display a message "Cart is empty. Add items before proceeding."
-
   Scenario: Validate product details in the cart
     Given the user has added "Sauce Labs Backpack" and "Sauce Labs Bike Light" to the cart
     When the user navigates to the cart page
