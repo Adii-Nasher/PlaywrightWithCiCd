@@ -1,0 +1,19 @@
+Feature: Sorting and Filters
+  As a user of the Sauce Labs Demo website
+  I want to test sorting and filtering features
+  So that I can ensure they work as expected
+
+  Scenario: Sort products by price (low to high)
+    Given the user is on the products page
+    When the user selects "Price (low to high)" from the sorting dropdown
+    Then the products should be displayed in ascending order of price
+
+  Scenario: Sort products by name (A to Z)
+    Given the user is on the products page
+    When the user selects "Name (A to Z)" from the sorting dropdown
+    Then the products should be displayed in alphabetical order
+
+  Scenario: Filter products by specific category
+    Given the user is on the products page
+    When the user applies the "Onesie" filter
+    Then only the "Sauce Labs Onesie" should be displayed

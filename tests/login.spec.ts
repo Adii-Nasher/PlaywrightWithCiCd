@@ -1,12 +1,13 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('Login Suite', () => {
-  test('Successful Login', async ({ page }) => {
+  test('Successful login with a standard user', async ({ page }) => {
     await page.goto('/');
     await page.fill('#user-name', 'standard_user');
     await page.fill('#password', 'secret_sauce');
     await page.click('#login-button');
     await expect(page).toHaveURL('/inventory.html');
+    await expect(page.locator('.title')).toHaveText('Products');
   });
 
   test('Login with Invalid Credentials', {

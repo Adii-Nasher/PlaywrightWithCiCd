@@ -1,0 +1,25 @@
+Feature: Error Handling for Login
+  As a user of the Sauce Labs Demo website
+  I want to test error handling during login
+  So that I can ensure appropriate error messages are displayed
+
+  Scenario: Login without a username
+    Given the user is on the login page
+    When the user leaves the username blank
+    And enters "secret_sauce" as the password
+    And clicks the "Login" button
+    Then the user should see an error message "Username is required."
+
+  Scenario: Login without a password
+    Given the user is on the login page
+    When the user enters "standard_user" as the username
+    And leaves the password blank
+    And clicks the "Login" button
+    Then the user should see an error message "Password is required."
+
+  Scenario: Login with invalid credentials
+    Given the user is on the login page
+    When the user enters "invalid_user" as the username
+    And enters "wrong_password" as the password
+    And clicks the "Login" button
+    Then the user should see an error message "Username and password do not match any user in this service."
