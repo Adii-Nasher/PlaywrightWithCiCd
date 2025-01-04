@@ -40,7 +40,7 @@ npx playwright show-report reports/playwright-report
 ## Documentation
 The project documentation, including the Manual Test Cases, is located in the `docs/` folder:
 
-- **Manual Test Cases**: [docs/ManualTestCases.txt](docs/ManualTestCases.txt)
+- **Manual Test Cases**: [docs/ManualTestCases.txt](https://github.com.mcas.ms/Adii-Nasher/PlaywrightWithCiCd/tree/main/docs)
 
 ## CI/CD Pipeline
 This repository is configured to use GitHub Actions for continuous integration and daily test execution.
