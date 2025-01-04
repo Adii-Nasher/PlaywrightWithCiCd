@@ -24,7 +24,6 @@ Feature: Cart Functionality
       | Sauce Labs Backpack    | $29.99   |
       | Sauce Labs Bike Light  | $9.99    |
 
-  @smoke
   Scenario: Successful Checkout
     Given the user is logged in as "standard_user" with password "secret_sauce"
     And the user has added "Sauce Labs Backpack" to the cart
