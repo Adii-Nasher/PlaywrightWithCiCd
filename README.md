@@ -1,4 +1,4 @@
-# Playwright Test Framework Instructions
+# Playwright Test With CI-CD
 
 ## Prerequisites
 1. Install [Node.js](https://nodejs.org/) (version 16 or higher).
